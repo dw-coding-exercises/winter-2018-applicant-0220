@@ -22,9 +22,17 @@
     keywordize-keys))
 
 (defn ->state-ocd
-  [state]
+  [{state :state}]
   {:pre [(and (string? state) (< 0 (.length state)))]}
   (str "ocd-division/country:us/state:" (string/lower-case state)))
+
+(defn ->place-ocd
+  [address]
+  (let [state-ocd (->state-ocd address)
+        city (-> (:city address)
+               string/lower-case
+               (string/replace #" " "_"))]
+    (str state-ocd "/place:" city)))
 
 ;; TODO: Handle missing fields, add CSS
 (defn format-address

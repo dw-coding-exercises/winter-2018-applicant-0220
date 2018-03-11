@@ -18,5 +18,10 @@
 
 (deftest ->state-ocd-test
   (testing "create OCD for state"
-    (is (= (search/->state-ocd "OR")
+    (is (= (search/->state-ocd {:state "OR"})
           "ocd-division/country:us/state:or"))))
+
+(deftest ->place-ocd-test
+  (testing "create OCD for city"
+    (is (= (search/->place-ocd {:city "New York" :state "NY"})
+          "ocd-division/country:us/state:ny/place:new_york"))))
