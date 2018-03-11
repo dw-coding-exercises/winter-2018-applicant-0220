@@ -3,7 +3,7 @@
             [my-exercise.search :as search]))
 
 
-(deftest format-address
+(deftest format-address-test
   (testing "address with all fields"
     (is (= (search/format-address
              {:street "20 Jay St"
@@ -15,3 +15,8 @@
            [:div "20 Jay St"]
            [:div "Suite 824"]
            [:div "Brooklyn, NY 11201"]]))))
+
+(deftest ->state-ocd-test
+  (testing "create OCD for state"
+    (is (= (search/->state-ocd "OR")
+          "ocd-division/country:us/state:or"))))

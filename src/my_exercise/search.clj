@@ -1,5 +1,6 @@
 (ns my-exercise.search
   (:require
+    [clojure.string :as string]
     [clojure.walk :refer [keywordize-keys]]
     [hiccup.page :refer [html5]]))
 
@@ -20,6 +21,10 @@
     (select-keys ["street" "street-2" "city" "state" "zip"])
     keywordize-keys))
 
+(defn ->state-ocd
+  [state]
+  {:pre [(and (string? state) (< 0 (.length state)))]}
+  (str "ocd-division/country:us/state:" (string/lower-case state)))
 
 ;; TODO: Handle missing fields, add CSS
 (defn format-address
